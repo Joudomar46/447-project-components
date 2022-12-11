@@ -1,8 +1,10 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import AppBar from '@mui/material/AppBar';
+import ToolBar from '@mui/material/ToolBar'
 import { createStyles,createTheme,ThemeProvider } from '@mui/material/styles'
-const drawerWidth = 240;
+import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
 
+// import logo from './media/Icon1.png';
 
 const theme = createTheme({
   status: {
@@ -27,10 +29,16 @@ export default function Navbar() {
     <ThemeProvider theme={theme}>
     <AppBar position='fixed'>
     <nav className="nav">
+
       <Link to="/" className="site-title">
-      <img class="navbarIcon" src="./favicon.ico"></img><i>EzWatts</i>
-     
+        
+         <ToolBar>
+      <img src={require="./media/Icon1.png"} alt="" maxWidth= "40px" />
+          <i>EzWatts</i>
+       </ToolBar>
       </Link>
+    
+
       <ul>
       <a>
         <CustomLink to="create/Create">Create</CustomLink>

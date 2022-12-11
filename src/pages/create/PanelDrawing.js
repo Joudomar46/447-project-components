@@ -1,6 +1,8 @@
 import {Stage, Layer,Rect} from 'react-konva'
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import Box from '@mui/material/Box';
+
 
 
 
@@ -97,6 +99,8 @@ export const PanelDrawing = ({panels}) => {
     const annotationsToDraw = [...annotations, ...newAnnotation];
     
     return (
+      <>
+      <Box>
       <Stage 
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -140,6 +144,8 @@ export const PanelDrawing = ({panels}) => {
           })}
         </Layer>
       </Stage>
+      </Box>
+      </>
     );
   };
   
