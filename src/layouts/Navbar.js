@@ -1,10 +1,15 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import AppBar from '@mui/material/AppBar';
-import ToolBar from '@mui/material/ToolBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import { createStyles,createTheme,ThemeProvider } from '@mui/material/styles'
 import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
+import logo from '../media/Icon1.png';
+import Grid from "@mui/material/Grid";
 
-// import logo from './media/Icon1.png';
 
 const theme = createTheme({
   status: {
@@ -26,29 +31,43 @@ const theme = createTheme({
 export default function Navbar() {
  
   return (
-    <ThemeProvider theme={theme}>
-    <AppBar position='fixed'>
-    <nav className="nav">
-
-      <Link to="/" className="site-title">
-        
-         <ToolBar>
-      <img src={require="./media/Icon1.png"} alt="" maxWidth= "40px" />
-          <i>EzWatts</i>
-       </ToolBar>
-      </Link>
+    <>
+   
+    <Box sx={{ flexGrow: 1 }}>
+       
+    <AppBar position="static"  >
+      <Toolbar>
+      <nav className="nav">
+      <Link to="/" >
+      <Box
+            component="img"
+            sx={{
+            height: 64,
+            }}
+            alt="Your logo."
+            src={logo}
+        />
+        </Link>
+       
     
-
       <ul>
-      <a>
+      <Link to="/" className="site-title">
+        EzWatts
+      </Link>
         <CustomLink to="create/Create">Create</CustomLink>
         <CustomLink to="Contact">Contact Us</CustomLink>
-        </a>   
       </ul>
-       
-      </nav>
+    
+          </nav> 
+      </Toolbar>
     </AppBar>
-    </ThemeProvider>
+ 
+
+  </Box>
+  
+
+
+</>
   )
 }
 

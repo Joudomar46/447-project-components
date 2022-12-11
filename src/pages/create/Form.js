@@ -2,6 +2,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Box from '@mui/material/Box';
+
 
 import React, { useState } from "react";
 
@@ -36,7 +38,12 @@ export function Form({ onSubmit }) {
   return (
     
     <>
-      <Paper style={{ padding: 16, margin: 16 , backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
+     <Box   display="flex"
+  justifyContent="center"
+  alignItems="center">
+    <p>Enter the information bellow</p></Box>
+      <Paper style={{ padding: 50, margin: 16 , 
+        backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
         <Grid container
         direction="column"
         justifyContent="space-around"
@@ -148,10 +155,7 @@ export function Form({ onSubmit }) {
         </Grid>
       </Paper>
 
-     
-      {/* 
-error={Boolean(errors.value2)}
-  helperText={errors.value2} */}
+   
     </>
   );
 }

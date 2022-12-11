@@ -105,7 +105,7 @@ export const PanelDrawing = ({panels}) => {
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        width={500}
+        width={1000}
         height={500}
       >
         <Layer>
@@ -113,7 +113,7 @@ export const PanelDrawing = ({panels}) => {
         <Rect
         x={0}
         y={0}
-        width={500}
+        width={1000}
         height={500}
         stroke="#000000"
         shadowBlur={1}

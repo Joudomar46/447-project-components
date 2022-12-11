@@ -10,16 +10,18 @@ export function Home() {
     return(
         //main 
         <>
-         <Grid container spacing={1}>
-         <Grid xs={1} spacing={2}>
-         </Grid>
-            <Grid item xs={5}spacing={1}>
+         <Grid container spacing={1} paddingTop= '10'
+  paddingRight= "5">
+            <Grid item xs={6}>
          <SwipeCarousel/>
          </Grid>
 
-          <Grid item xs={5}spacing={10}>
+          <Grid item xs={6}  container
+  direction="column"
+  justifyContent="space-evenly"
+  alignItems="center">
         <h1 className="headTextHeading">Welcome to EzWatts!</h1>
-        <Box textAlign='center'>
+        <Box textAlign='center' sx={{fontSize: 24}}>
         <Link to="./create/Create" underline = 'none'>
     <Button variant="contained" color="primary"href="./create/Create">
       Get Started
@@ -37,24 +39,6 @@ export function Home() {
                 </p>
                 </Grid>
         </Grid>
-
-  {/* <Grid item xs={6} md={8}>
-    <Item>xs=6 md=8</Item>
-  </Grid>
-  <Grid item xs={6} md={4}>
-    <Item>xs=6 md=4</Item>
-  </Grid>
-  <Grid item xs={6} md={4}>
-    <Item>xs=6 md=4</Item>
-  </Grid>
-  <Grid item xs={6} md={8}>
-    <Item>xs=6 md=8</Item>
-  </Grid> */}
-{/* </Grid> */}
-
-         
-    
-               
             </>
     )
 }

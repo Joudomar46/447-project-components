@@ -50,12 +50,7 @@ export function Create() {
           const totalPanel = numPanelsWide * numPanelsTall;
           setTotalPanels(totalPanel);
 
-          console.log("totalPanel");
-
-          console.log(totalPanel);
-
-          
-
+        
 
     };
       // add coordinanted for each array
@@ -65,8 +60,8 @@ export function Create() {
   const usableHeight = Math.floor(+roofDimentions.roofHeight - +spacingDimentions.edgeSpacing*2);
   const columnSpace = (juristictionWidth - +panelDimentions.panelWidth );
   const rowSpace = (juristictionHeight - +panelDimentions.panelHeight);
-  let xCoord = +spacingDimentions.edgeSpacing + ((usableWidth + columnSpace) / juristictionWidth - numPanelsWide) * juristictionWidth/2;
-  let yCoord = +spacingDimentions.edgeSpacing + ((usableHeight + rowSpace) / juristictionHeight - numPanelsTall) * juristictionHeight/2;
+  let xCoord = +spacingDimentions.edgeSpacing + ((+usableWidth + +columnSpace) / +juristictionWidth - +numPanelsWide) * +juristictionWidth/2;
+  let yCoord = +spacingDimentions.edgeSpacing + ((+usableHeight + +rowSpace) / +juristictionHeight - +numPanelsTall) * +juristictionHeight/2;
   let xCoordUpdate = xCoord
 
   const objects = [];
@@ -94,22 +89,32 @@ export function Create() {
       y: obj.y,
       width: +panelDimentions.panelWidth,
       height: +panelDimentions.panelHeight,
-      fill: '#00D1B2',
+      fill: '#22277A',
       shadowBlur: 5
     }));
 
 
   return (
     <>
-     <Grid container spacing={1}>
-         <Grid item xs={3} spacing={2}>
+   
+   
+     <Grid container spacing={1} justifyContent="space-around"   alignItems="flex-start"
+>
+         <Grid item xs={2} >
     <Box>
     <Form onSubmit={handleSubmit} />
     </Box>
     </Grid>
 
     <Grid item xs>
+    <Box>
+    <p>   Click and drag to draw keepout sections</p>
+    <Paper style={{ padding: 50, margin: 16 , 
+        backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
+          
     <PanelDrawing panels = {panels}/>
+    </Paper>
+    </Box>
     </Grid>
     </Grid>
 
