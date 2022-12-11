@@ -70,6 +70,7 @@ export const PanelDrawing = ({panels}) => {
         stroke="#000000"
         shadowBlur={1}
       />
+
       {panels.map((panel) => (
           <Rect
             x={panel.x}

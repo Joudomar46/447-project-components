@@ -2,37 +2,43 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import  FormControl  from "@mui/material/FormControl";
 
 import React, { useState, useRef } from "react";
 
 export function Form({ onSubmit }) {
   const [panelDimention, setPanelDimention] = useState({
     panelWidth: "",
-    panelHeight: "",
+    panelHeight: ''
   });
 
   const [roofDimention, setRoofDimention] = useState({
-    roofWidth: "",
-    roofHeight: "",
+    roofWidth: '',
+    roofHeight: ''
   });
 
   const [spacingDimention, setSpacingDimention] = useState({
-    columnSpacing: "",
-    rowSpacing: "",
-    edgeSpacing: "",
+    columnSpacing: '',
+    rowSpacing: '',
+    edgeSpacing: ''
   });
+
+
+
+
   // Handle submit
-  function handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
 
     // return the updated values to Create
-    onSubmit(panelDimention);
+    onSubmit(panelDimention,roofDimention,spacingDimention);
   }
 
   return (
     <>
       <Paper style={{ padding: 16, margin: 16 }}>
         <Grid container spacing={1}>
+      
 
           <Grid item xs={6} sm={6}>
             <TextField
@@ -76,7 +82,7 @@ export function Form({ onSubmit }) {
             </Grid>
             <Grid item xs={6} sm={6}>
             <TextField
-              name="roofHight"
+              name="roofHeight"
               label="Roof Hight"
               value={roofDimention.roofHeight}
               onChange={(event) =>
@@ -129,15 +135,16 @@ export function Form({ onSubmit }) {
             </Grid>
 
           <Grid item xs={12}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Button type="submit" variant="contained" color="primary" onSubmit={handleSubmit} >
               Submit
             </Button>
 
-
-
           </Grid>
+       
         </Grid>
       </Paper>
+
+     
       {/* 
 error={Boolean(errors.value2)}
   helperText={errors.value2} */}
