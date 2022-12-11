@@ -1,6 +1,9 @@
 import {Form} from "./Form";
 import {PanelDrawing} from "./PanelDrawing";
 import {Stage, Layer,Rect} from 'react-konva';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from "@mui/material/Grid";
 
 import React, { useLayoutEffect, useState } from 'react';
 
@@ -98,8 +101,17 @@ export function Create() {
 
   return (
     <>
+     <Grid container spacing={1}>
+         <Grid item xs={3} spacing={2}>
+    <Box>
     <Form onSubmit={handleSubmit} />
+    </Box>
+    </Grid>
+
+    <Grid item xs>
     <PanelDrawing panels = {panels}/>
+    </Grid>
+    </Grid>
 
   
     </>

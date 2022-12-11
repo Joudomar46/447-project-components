@@ -1,5 +1,5 @@
-import {Stage, Layer,Rect, Shape} from 'react-konva'
-import React, { useState,useRef } from "react";
+import {Stage, Layer,Rect} from 'react-konva'
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 
@@ -17,19 +17,6 @@ function isPointInRectangle(x,y,rect){
 export const PanelDrawing = ({panels}) => {
     const [annotations, setAnnotations] = useState([]);
     const [newAnnotation, setNewAnnotation] = useState([]);
-    const object1 = {
-      x: 50,
-      y: 50,
-      width: 100,
-      height: 100
-    };
-  
-    const object2 = {
-      x: 75,
-      y: 75,
-      width: 100,
-      height: 100
-    };
 
     const handleMouseDown = event => {
       if (newAnnotation.length === 0) {

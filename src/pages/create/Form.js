@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 export function Form({ onSubmit }) {
   const [panelDimention, setPanelDimention] = useState({
@@ -34,11 +34,15 @@ export function Form({ onSubmit }) {
   }
 
   return (
+    
     <>
-      <Paper style={{ padding: 16, margin: 16 }}>
-        <Grid container spacing={1}>
+      <Paper style={{ padding: 16, margin: 16 , backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
+        <Grid container
+        direction="column"
+        justifyContent="space-around"
+        alignItems="center" spacing={1}>
 
-          <Grid item xs={6} sm={6}>
+          <Grid item xs={6}>
             <TextField
               name="panelWidth"
               label="Panel Width"
