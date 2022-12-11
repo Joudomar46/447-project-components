@@ -1,12 +1,15 @@
 import './App.css';
 import {Create} from './Create';
 
-function App() {
+export default function App() {
 
   return (
+    <>
+     
     <Create/>
+   
+    </>
 
   );
 }
 
-export default App;

@@ -2,32 +2,31 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import  FormControl  from "@mui/material/FormControl";
 
 import React, { useState, useRef } from "react";
 
 export function Form({ onSubmit }) {
   const [panelDimention, setPanelDimention] = useState({
     panelWidth: "",
-    panelHeight: ''
+    panelHeight: "",
   });
 
   const [roofDimention, setRoofDimention] = useState({
-    roofWidth: '',
-    roofHeight: ''
+    roofWidth: "",
+    roofHeight: "",
   });
 
   const [spacingDimention, setSpacingDimention] = useState({
-    columnSpacing: '',
-    rowSpacing: '',
-    edgeSpacing: ''
+    columnSpacing: "",
+    rowSpacing: "",
+    edgeSpacing:"",
   });
 
 
 
 
   // Handle submit
-  const handleSubmit = event => {
+  function handleSubmit(event) {
     event.preventDefault();
 
     // return the updated values to Create
@@ -38,7 +37,6 @@ export function Form({ onSubmit }) {
     <>
       <Paper style={{ padding: 16, margin: 16 }}>
         <Grid container spacing={1}>
-      
 
           <Grid item xs={6} sm={6}>
             <TextField
@@ -135,9 +133,11 @@ export function Form({ onSubmit }) {
             </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" onSubmit={handleSubmit} >
+            <form/>
+            <Button   onClick={handleSubmit} type="submit" variant="contained" color="primary" >
               Submit
             </Button>
+            <form/>
 
           </Grid>
        

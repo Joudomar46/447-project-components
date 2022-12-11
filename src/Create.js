@@ -30,76 +30,76 @@ export function Create() {
         setRoofDimentions(roofDimention);
         setSpacingDimentions(spacingDimention);
 
-        // const juristictionWidth =  Math.floor(+panelDimentions?.panelWidth 
-        //   + +spacingDimentions?.columnSpacing); 
-        // const juristictionHeight =  Math.floor(+panelDimentions?.panelHeight +
-        //    +spacingDimentions?.rowSpacing);
-        //    setJuristictionWidth(juristictionWidth); 
-        //    setJuristictionHeight(juristictionHeight);
+        const juristictionWidth =  Math.floor(+panelDimention.panelWidth 
+          + +spacingDimention?.columnSpacing); 
+        const juristictionHeight =  Math.floor(+panelDimention.panelHeight +
+           +spacingDimention.rowSpacing);
+           setJuristictionWidth(juristictionWidth); 
+           setJuristictionHeight(juristictionHeight);
           
-        //    const numPanelsWide = Math.floor(((+roofDimentions?.roofWidth - (+spacingDimentions?.edgeSpacing * 2))
-        //    + +spacingDimentions?.columnSpacing) /juristictionWidth);
-        //   const numPanelsTall = Math.floor(((+roofDimentions?.roofHeight - (2 * +spacingDimentions?.edgeSpacing))
-        //    + +spacingDimentions?.rowSpacing) / juristictionHeight);
-        //   setNumPanelsWide(numPanelsWide);
-        //   setNumPanelsTall(numPanelsTall);
+           const numPanelsWide = Math.floor(((+roofDimention.roofWidth - (+spacingDimention.edgeSpacing * 2))
+           + +spacingDimention.columnSpacing) /juristictionWidth);
+          const numPanelsTall = Math.floor(((+roofDimention.roofHeight - (2 * +spacingDimention.edgeSpacing))
+           + +spacingDimention.rowSpacing) / juristictionHeight);
+          setNumPanelsWide(numPanelsWide);
+          setNumPanelsTall(numPanelsTall);
 
-        //   const totalPanels = numPanelsWide * numPanelsTall;
-        //   setTotalPanels(totalPanels);
+          const totalPanel = numPanelsWide * numPanelsTall;
+          setTotalPanels(totalPanel);
 
-             
-        //   console.log('panels');
+          console.log("totalPanel");
 
-        //    console.log(totalPanels);
+          console.log(totalPanel);
 
           
-    // const objects = [];
-    // let space = 100;
-    // for (let i = 1; i <= totalPanels; i++) {
-    //   objects.push({
-    //       x: space,
-    //       y: '',
-    //       width: '',
-    //       height: '',
-    //       fill: '',
-    //       shadowBlur: ''
-    //   });
-    //   space = space +200;
-    // }
 
-    // const panels = objects.map(obj => ({
-    //   x: obj.x,
-    //   y: 100,
-    //   width: 100,
-    //   height: 100,
-    //   fill: '#00D1B2',
-    //   shadowBlur: 5
-    // }));
-    
-    // console.log(panels);
 
     };
-    // console.log(totalPanels);
+      // add coordinanted for each array
+  // first coordinant starts at x and y = edgeSpacing from the upper left
 
-        //Get juristiction which is the space around a panel width and hight wise
+  const usableWidth = Math.floor(+roofDimentions.roofWidth - +spacingDimentions.edgeSpacing*2);
+  const usableHeight = Math.floor(+roofDimentions.roofHeight - +spacingDimentions.edgeSpacing*2);
+  const columnSpace = (juristictionWidth - +panelDimentions.panelWidth );
+  const rowSpace = (juristictionHeight - +panelDimentions.panelHeight);
+  let xCoord = +spacingDimentions.edgeSpacing + ((usableWidth + columnSpace) / juristictionWidth - numPanelsWide) * juristictionWidth/2;
+  let yCoord = +spacingDimentions.edgeSpacing + ((usableHeight + rowSpace) / juristictionHeight - numPanelsTall) * juristictionHeight/2;
+  let xCoordUpdate = xCoord
 
-    
-        // Calculate the number of panels that will fit on the roof
-        // This accounts for the edgespace and row/column spacing overlap
- 
+  const objects = [];
+  // for each panel set the panels to send to canvas
+      
+  for (let i = 0; i < numPanelsTall; i++) {  //for each row 
+    for (let j = 0; j < numPanelsWide; j++) {   //each column
 
+      objects.push({
+          x: xCoord,
+          y: yCoord,
+          width: '',
+          height: '',
+          fill: '',
+          shadowBlur: ''
+      });
+      xCoord = xCoord + juristictionWidth;
+    }
+    xCoord = xCoordUpdate;
+    yCoord = yCoord + juristictionHeight;
+  }
+    // create array to send to panel drawing
+    const panels = objects.map(obj => ({
+      x: obj.x,
+      y: obj.y,
+      width: +panelDimentions.panelWidth,
+      height: +panelDimentions.panelHeight,
+      fill: '#00D1B2',
+      shadowBlur: 5
+    }));
 
- 
-
-  // 
-
-  let sum = +panelDimentions?.panelWidth + 7;
 
   return (
     <>
     <Form onSubmit={handleSubmit} />
-    <div>Here: {sum}</div>
-    {/* <PanelDrawing panels = {panels}/> */}
+    <PanelDrawing panels = {panels}/>
 
   
     </>
