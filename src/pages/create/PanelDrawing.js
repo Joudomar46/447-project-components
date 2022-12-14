@@ -4,11 +4,7 @@ import ReactDOM from "react-dom";
 import Box from '@mui/material/Box';
 
 
-
-
 function isPointInRectangle(x,y,rect){
-  console.log(x)
-  console.log(y)
   if(x>rect.x && x<rect.x+rect.width && y>rect.y 
   && y<rect.y+rect.height){
   return(true);
@@ -16,10 +12,11 @@ function isPointInRectangle(x,y,rect){
   return(false);
 }
 
-export const PanelDrawing = ({panels}) => {
+export const PanelDrawing = ({panels, canvasDimenstions}) => {
+    // console.log(canvasDimenstions.canvasWidth);
     const [annotations, setAnnotations] = useState([]);
     const [newAnnotation, setNewAnnotation] = useState([]);
-
+    
     const handleMouseDown = event => {
       if (newAnnotation.length === 0) {
         const { x, y } = event.target.getStage().getPointerPosition();
@@ -45,6 +42,7 @@ export const PanelDrawing = ({panels}) => {
         annotations.push(annotationToAdd);
         setNewAnnotation([]);
         setAnnotations(annotations);
+
         console.log(annotations)
 
         // get last annotation in array
@@ -60,7 +58,7 @@ export const PanelDrawing = ({panels}) => {
         console.log(lastAnnotation);
         
   
-        for (let i = 0; i < (panels.length - 1); i++){
+        for (let i = 0; i < (panels.length); i++){
           const som = isPointInRectangle(sx,sy,panels[i]);
           const som1 = isPointInRectangle(x2,y2,panels[i]);
           const som2 = isPointInRectangle(x3,y3,panels[i]);
@@ -69,13 +67,8 @@ export const PanelDrawing = ({panels}) => {
         if(som||som1||som2||som3){
           panels[i].width = 0;
           panels[i].height = 0;
-          console.log('true');
         }
       }
-
-
-
-        
       }
     };
   
@@ -105,16 +98,16 @@ export const PanelDrawing = ({panels}) => {
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        width={1000}
-        height={500}
+        width={canvasDimenstions.canvasWidth}
+        height={canvasDimenstions.canvasHight}
       >
         <Layer>
     
         <Rect
         x={0}
         y={0}
-        width={1000}
-        height={500}
+        width={canvasDimenstions.canvasWidth}
+        height={canvasDimenstions.canvasHight}
         stroke="#000000"
         shadowBlur={1}
       />

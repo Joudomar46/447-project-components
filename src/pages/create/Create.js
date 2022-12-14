@@ -29,10 +29,21 @@ export function Create() {
     const [array, setArray] = useState(new Array());
 
     function handleSubmit(panelDimention,roofDimention,spacingDimention) {
+
         setPanelDimentions(panelDimention);
         setRoofDimentions(roofDimention);
         setSpacingDimentions(spacingDimention);
 
+        // copy over the newly changed inputs using + to convert from string to number
+        // const ratio = 1000/Math.max(roofDimention.roofWidth, roofDimention.roofHeight);
+        // setPanelDimentions( +panelDimentions.panelWidth * ratio);
+        // panelDimentions.panelHeight *= ratio;
+        // roofDimentions.roofWidth *= ratio;
+        // roofDimentions.roofHeight *= ratio;
+        // spacingDimentions.rowSpacing *= ratio;
+        // spacingDimentions.columnSpacing *= ratio;
+        // spacingDimentions.edgeSpacing *= ratio;
+              
         const juristictionWidth =  Math.floor(+panelDimention.panelWidth 
           + +spacingDimention?.columnSpacing); 
         const juristictionHeight =  Math.floor(+panelDimention.panelHeight +
@@ -92,6 +103,11 @@ export function Create() {
       fill: '#22277A',
       shadowBlur: 5
     }));
+    // object to send to panel drawing
+    const canvasDimenstions = ({
+      canvasWidth:+roofDimentions.roofWidth,
+      canvasHight:+roofDimentions.roofHeight
+    })
 
 
   return (
@@ -112,7 +128,7 @@ export function Create() {
     <Paper style={{ padding: 50, margin: 16 , 
         backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
           
-    <PanelDrawing panels = {panels}/>
+    <PanelDrawing panels = {panels} canvasDimenstions = {canvasDimenstions}/>
     </Paper>
     </Box>
     </Grid>
