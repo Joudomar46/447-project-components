@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import React, { useState } from "react";
 
 export function Form({ onSubmit }) {
+
   const [panelDimention, setPanelDimention] = useState({
     panelWidth: "",
     panelHeight: "",
@@ -132,7 +133,6 @@ export function Form({ onSubmit }) {
         direction="column"
         justifyContent="space-around"
         alignItems="center" spacing={1}>
-
           <Grid item xs={6}>
             <TextField
               name="panelWidth"

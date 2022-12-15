@@ -2,6 +2,7 @@ import {Stage, Layer,Rect} from 'react-konva'
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 
 
 function isPointInRectangle(x,y,rect){
@@ -137,6 +138,9 @@ export const PanelDrawing = ({panels, canvasDimenstions}) => {
           })}
         </Layer>
       </Stage>
+      <Button type="button"  color="primary">
+        Done
+      </Button>
       </Box>
       </>
     );
