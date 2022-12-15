@@ -139,14 +139,14 @@ export function DataFromAPI(keepoutPanels) {
 
                 <Grid item xs={5}>
                   <h4>
-                    Your Anual Solar Radiation: {solardAnnual.toFixed(2)}
+                    Anunal Solar Radiation in the Area: {solardAnnual.toFixed(2)}
                     (kWh/m2/day)
                   </h4>
-                  <h4>Your Anual AC: {AcAnnual.toFixed(2)} (kWh)</h4>
+                  <h4>Annual AC energy produced by {+keepoutPanels.keepoutPanels} Panels: {AcAnnual.toFixed(2)} (kWh)</h4>
                   <h4>
-                    Your total production value $
-                    {AcAnnual.toFixed(2) * resultsInfos.costPerKWH.toFixed(2)}
+                    Annual saving costs: ${AcAnnual.toFixed(2) * resultsInfos.costPerKWH.toFixed(2)}
                   </h4>
+                 
                 </Grid>
               </Grid>
             </Paper>
