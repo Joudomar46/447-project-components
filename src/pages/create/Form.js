@@ -124,8 +124,8 @@ export function Form({ onSubmit }) {
     
     <>
      <Box display="flex"
-  justifyContent="center"
-  alignItems="center">
+      justifyContent="center"
+       alignItems="center">
     <h3>Enter the dimentions bellow</h3></Box>
       <Paper style={{ padding: 50, margin: 16 , 
         backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>

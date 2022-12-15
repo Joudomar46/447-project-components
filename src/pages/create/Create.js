@@ -30,17 +30,7 @@ export function Create() {
 
  const [showComponentPanel, setShowComponentPanel] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  // to remove form and show new form
-  const [open, setOpen] = useState(false);
-  const message = "Hello from OldComponent!";
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   // Initialize a new array
   const [array, setArray] = useState(new Array());
@@ -165,8 +155,8 @@ export function Create() {
   };
 
   const info = {
-    canvasWidth: +roofDimentions.roofWidth,
-    canvasHight: +roofDimentions.roofHeight,
+    totalPanels: +keepoutPanels,
+    panelArea: +panelDimentions.panelHeight * +panelDimentions.panelWidth,
   };
 
   return (

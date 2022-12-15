@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 
 const styles = {
   table: {
-    minWidth: 650,
+    minWidth: 400,
   },
 };
 
@@ -17,8 +17,14 @@ const MonthlyDataTable = ({ rows }) => {
   return (
     <TableContainer sx={{
         border: "2px solid black", 
+        width: "max-content" ,
+        height: "max-content",
       }}>
-      <Table aria-label="simple table" >
+      <Table aria-label="simple table"  borderCollapse= 'separate'
+    borderSpacing= '0px 0px' sx={{
+      width: "max-content",
+      height: "max-content"
+    }} >
         <TableHead>
           <TableRow sx={{
         backgroundColor: "#1565c0",
@@ -53,8 +59,7 @@ const MonthlyDataTable = ({ rows }) => {
               <TableCell align="left" sx={{
         borderRight: "2px solid black",}}>{datum.solarRad}</TableCell>
 
-        <TableCell align="left" sx={{
-        borderRight: "2px solid black",}}>{datum.AcEnergy}</TableCell>
+        <TableCell align="left">{datum.AcEnergy}</TableCell>
         
             </TableRow>
             

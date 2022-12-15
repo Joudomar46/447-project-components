@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import {ResultsForm} from "./ResultForm";
 import Table from "./Table";
 import Paper from "@mui/material/Paper";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+
 
 
 // function getDataFromAPI(requestParams)
@@ -17,6 +21,9 @@ export function DataFromAPI(infos) {
   const [flag,setFlag]=useState(false);
 
   const [showComponent, setShowComponent] = useState(false);
+
+  // to remove form and show new form
+  const [open, setOpen] = useState(false);
 
 
   // function createData(month, value,value2) {
@@ -41,8 +48,10 @@ export function DataFromAPI(infos) {
   function handleSubmit(
     resultsInfo
   ) {
+
     setresultsInfos(resultsInfo);
     setFlag(true);
+    handleOpen();
   }
 
   if(flag && resultsInfos.address != ''){
@@ -103,47 +112,42 @@ export function DataFromAPI(infos) {
 //address=${info?.addr}
 //&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
 
-  // Function to handle the click event on the button
-//     const handleClick = () => {
-//       setClicked(true);
-//     }
 
-//   // Make a GET request to the API
-//   React.useEffect(() => {
-//     if (clicked) {
-//     axios.get(`https://developer.nrel.gov/api/pvwatts/v8.json?&api_key=DEMO_KEY&azimuth=180&system_capacity=4&losses=14&array_type=1&module_type=0&gcr=0.4&dc_ac_ratio=1.2&inv_eff=96.0&radius=0&dataset=nsrdb&tilt=10&address=${info?.addr}&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
-//       .then(response => {
-//         console.log(response);
-//         setAcMonthly(response.data.outputs.ac_monthly);
-//       })
-//       .catch(err => {
-//         setError(err);
-//         console.log(err);
-//       })
-//       setClicked(false);
-//   }}, [clicked]);
+const handleOpen = () => {
+  setOpen(true);
+};
 
-   
-// console.log(acMonthly);
+const handleClose = () => {
+  setOpen(false);
+};
 
-//   if (error) {
-    
-//     return (<><button onClick={handleClick}>Click me to call the API</button>
-//     <div>An error occurred: {error.message}</div></>);
-//   }
-// console.log({info});
 return(
 <>
-
-{/* {data && data.someProperty} */}
-<div>
   
 <ResultsForm onClick={handleSubmit} />
 
-{showComponent ?  <Paper style={{ padding: 50, margin: 16 , 
-        backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
-        <Table rows={rows}/></Paper>: null}
-    </div>
+{showComponent ?   <div>
+  <Box display="inline-block"
+      justifyContent="center"
+        alignItems="center">
+        <Modal open={open} onClose={handleClose}>
+ 
+       <Paper style={{ padding: 20, margin: 16 , 
+        backgroundColor: '#F8F0E3', color: 'black', minHeight: '90vh',
+        maxHeight: '120vh'}}>
+        
+      <div>
+        
+        <Button type="button" onClick={handleClose} color="primary">
+       Close Results
+      </Button> 
+      <Table rows = {rows}/>
+      </div>
+        </Paper>
+        </Modal>
+        </Box>
+        </div>
+        : null}
    
 </>
 )}

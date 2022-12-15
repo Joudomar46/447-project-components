@@ -3,10 +3,14 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from '@mui/material/Box';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
 
 import React, { useState } from "react";
 
 export const ResultsForm = ({onClick}) => {
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const [resultsInfo, setresultsInfo] = useState({
     address: "",
@@ -29,6 +33,23 @@ export const ResultsForm = ({onClick}) => {
      onClick(resultsInfo);
     }
   
+    // for drop down menu
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const handleMenuItemClick = (event, value) => {
+      resultsInfo.array_type = value;
+      console.log(resultsInfo);
+
+      setAnchorEl(null);
+    };
 
   return (
     <>
@@ -39,11 +60,11 @@ export const ResultsForm = ({onClick}) => {
       <Paper style={{ padding: 50, margin: 16 , 
         backgroundColor: '#F8F0E3', color: 'black'}}>
         <Grid container
-        direction="row"
-        justifyContent="space-around"
-        alignItems="center" spacing={1}>
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="baseline" spacing={1}>
 
-          <Grid item xs={6}>
+          <Grid item xs = "auto">
             <TextField
               name="address"
               label="Address"
@@ -56,7 +77,34 @@ export const ResultsForm = ({onClick}) => {
               }
          /></Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs= "auto">
+          <p>Select Array Type</p>
+          <Button color="primary"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+             >
+               {(resultsInfo.array_type === '0') ? 'Fixed - Open Rack' : 
+               (resultsInfo.array_type === '1') ? 'Fixed - Roof Mounted' 
+               : 'Open Menu'}
+
+            </Button>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+            <MenuItem onClick={(event) => handleMenuItemClick(event, '0')}>Fixed - Open Rack</MenuItem>
+            <MenuItem onClick={(event) => handleMenuItemClick(event, '1')}>Fixed - Roof Mounted</MenuItem>
+            </Menu>
+            
+         </Grid>
+
+          <Grid item xs= "auto">
             <TextField
               name="azmith"
               label="Azmith"
@@ -69,60 +117,7 @@ export const ResultsForm = ({onClick}) => {
               }
          /></Grid>
 
-          <Grid item xs={6}>
-            <TextField
-              name="losses"
-              label="Losses"
-              value={resultsInfo.losses}
-              onChange={(event) =>
-                setresultsInfo({
-                  ...resultsInfo,
-                  [event.target.name]: event.target.value,
-                })
-              }
-         /></Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              name="array_type"
-              label="Array Type"
-              value={resultsInfo.array_type}
-              onChange={(event) =>
-                setresultsInfo({
-                  ...resultsInfo,
-                  [event.target.name]: event.target.value,
-                })
-              }
-         /></Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              name="gcr"
-              label="GCR"
-              value={resultsInfo.gcr}
-              onChange={(event) =>
-                setresultsInfo({
-                  ...resultsInfo,
-                  [event.target.name]: event.target.value,
-                })
-              }
-         /></Grid>
-
-          <Grid item xs={6}>
-            <p>Optional</p>
-            <TextField
-              name="dc_ac_ratio"
-              label="DC AC Ratio"
-              value={resultsInfo.dc_ac_ratio}
-              onChange={(event) =>
-                setresultsInfo({
-                  ...resultsInfo,
-                  [event.target.name]: event.target.value,
-                })
-              }
-         /></Grid>
-
-          <Grid item xs={6}>
+         <Grid item xs= "auto">
             <TextField
               name="tilt"
               label="Panel Tilt"
@@ -135,16 +130,64 @@ export const ResultsForm = ({onClick}) => {
               }
          /></Grid>
 
-          <Grid item xs={12}>
-            <form/>
-            <Button  onClick={handleSubmit} type="submit" variant="contained" color="primary">
-              Submit
-            </Button>
-            <form/>
+          <Grid item xs= "auto">
+            <TextField
+              name="losses"
+              label="Losses (optional)"
+              value={resultsInfo.losses}
+              onChange={(event) =>
+                setresultsInfo({
+                  ...resultsInfo,
+                  [event.target.name]: event.target.value,
+                })
+              }
+         /></Grid>
 
+          <Grid item xs= "auto">
+            <TextField
+              name="gcr"
+              label="GCR (optional)"
+              value={resultsInfo.gcr}
+              onChange={(event) =>
+                setresultsInfo({
+                  ...resultsInfo,
+                  [event.target.name]: event.target.value,
+                })
+              }
+         /></Grid>
+         
+          <Grid item xs= "auto">
+            <TextField
+              name="dc_ac_ratio"
+              label="DC AC Ratio (optional)"
+              value={resultsInfo.dc_ac_ratio}
+              onChange={(event) =>
+                setresultsInfo({
+                  ...resultsInfo,
+                  [event.target.name]: event.target.value,
+                })
+              }
+         /></Grid>
+
+
+          <Grid item xs={12}>
+          <Box display="flex"
+              justifyContent="center"
+                alignItems="center">
+                  <form/>
+      
+      <Button sx={{
+        marginBottom: '30px'}} onClick={handleSubmit} type="submit" variant="contained" color="primary">
+          View Table
+      </Button>
+      <form/>
+
+      </Box>
+            
           </Grid>
        
         </Grid>
+ 
       </Paper>
 
    
