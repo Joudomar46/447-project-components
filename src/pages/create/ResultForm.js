@@ -12,10 +12,10 @@ export const ResultsForm = ({onClick}) => {
     address: "",
     azmith: "",
     system_capacity: "",
-    losses: "",
+    losses: "14",
     array_type: "",
-    module_type:"",
-    gcr:"",
+    module_type:"0",
+    gcr:"0.4",
     dc_ac_ratio:"1.2",
     inv_eff:"96.0",
     radius: "0",
@@ -35,7 +35,7 @@ export const ResultsForm = ({onClick}) => {
      <Box display="flex"
       justifyContent="center"
         alignItems="center">
-    <p>Enter the information bellow</p></Box>
+    <h3>Enter the information bellow</h3></Box>
       <Paper style={{ padding: 50, margin: 16 , 
         backgroundColor: '#F8F0E3', color: 'black'}}>
         <Grid container
@@ -82,18 +82,6 @@ export const ResultsForm = ({onClick}) => {
               }
          /></Grid>
 
-          <Grid item xs={6}>
-            <TextField
-              name="module_type"
-              label="Module Type"
-              value={resultsInfo.module_type}
-              onChange={(event) =>
-                setresultsInfo({
-                  ...resultsInfo,
-                  [event.target.name]: event.target.value,
-                })
-              }
-         /></Grid>
           <Grid item xs={6}>
             <TextField
               name="array_type"
@@ -164,4 +152,19 @@ export const ResultsForm = ({onClick}) => {
   );
 }
 
-    
+{/* <Button
+disabled={panelDimentions === ""}
+type="button"
+onClick={handleOpen}
+color="primary"
+>
+Open Modal
+</Button>
+<Modal open={open} onClose={handleClose}>
+<div>
+<DataFromAPI info={info} />
+  <Button type="button" onClick={handleClose} color="primary">
+    Close Modal
+  </Button>
+</div>
+</Modal> */}

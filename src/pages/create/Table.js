@@ -51,10 +51,10 @@ const MonthlyDataTable = ({ rows }) => {
                 {datum.month}
               </TableCell>
               <TableCell align="left" sx={{
-        borderRight: "2px solid black",}}>{datum.value}</TableCell>
+        borderRight: "2px solid black",}}>{datum.solarRad}</TableCell>
 
         <TableCell align="left" sx={{
-        borderRight: "2px solid black",}}>{datum.value2}</TableCell>
+        borderRight: "2px solid black",}}>{datum.AcEnergy}</TableCell>
         
             </TableRow>
             

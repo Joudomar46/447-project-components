@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 
 
 function isPointInRectangle(x,y,rect){
@@ -13,11 +14,22 @@ function isPointInRectangle(x,y,rect){
   return(false);
 }
 
-export const PanelDrawing = ({panels, canvasDimenstions}) => {
+
+
+export const PanelDrawing = ({panels, canvasDimenstions, onClick }) => {
     // console.log(canvasDimenstions.canvasWidth);
     const [annotations, setAnnotations] = useState([]);
     const [newAnnotation, setNewAnnotation] = useState([]);
+
+    const [deletedPanels, setDeletedPanels] = useState(0);
     
+    // once user clicks show results 
+    // calculate number of panels left and return value
+    // to Create to pass to pass to API for System Size 
+    function handleClick(){
+      onClick(deletedPanels);
+    }
+
     const handleMouseDown = event => {
       if (newAnnotation.length === 0) {
         const { x, y } = event.target.getStage().getPointerPosition();
@@ -44,8 +56,6 @@ export const PanelDrawing = ({panels, canvasDimenstions}) => {
         setNewAnnotation([]);
         setAnnotations(annotations);
 
-        console.log(annotations)
-
         // get last annotation in array
         const lastIndex = annotations.length - 1;
         const lastAnnotation = annotations[lastIndex];
@@ -55,19 +65,21 @@ export const PanelDrawing = ({panels, canvasDimenstions}) => {
         const y3 = sy + (y - sy)
         const x4 = sx + (x - sx)
         const y4 = sy + (y - sy)
-        // const allPoints = [x, y, x2, y2, x3, y3, x4, y4]
-        console.log(lastAnnotation);
-        
-  
+        // const allPoints = [x, y, x2, y2, x3, y3, x4, y4]        
+        let counter = 0;
         for (let i = 0; i < (panels.length); i++){
           const som = isPointInRectangle(sx,sy,panels[i]);
           const som1 = isPointInRectangle(x2,y2,panels[i]);
           const som2 = isPointInRectangle(x3,y3,panels[i]);
           const som3 = isPointInRectangle(x4,y4,panels[i]);
-
+          
         if(som||som1||som2||som3){
           panels[i].width = 0;
           panels[i].height = 0;
+          // to count each time we delete a counter to send to API
+          counter = counter + 1;
+          let temp = deletedPanels + counter;
+          setDeletedPanels(temp);
         }
       }
       }
@@ -94,7 +106,26 @@ export const PanelDrawing = ({panels, canvasDimenstions}) => {
     
     return (
       <>
-      <Box>
+       <Box display="flex"
+      justifyContent="center"
+        alignItems="center">
+      <h3>Click and drag to draw keepout sections</h3></Box>
+      <Box display="flex"
+      justifyContent="center"
+        alignItems="center">
+      <Paper style={{ padding: 50, margin: 16 , 
+        backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
+
+ <Box display="flex"
+      justifyContent="center"
+        alignItems="center">
+      <Button sx={{
+        marginBottom: '30px'}} onClick={handleClick} type="submit" variant="contained" color="primary">
+          Show Results Form
+      </Button>
+      </Box>
+
+
       <Stage 
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -138,9 +169,9 @@ export const PanelDrawing = ({panels, canvasDimenstions}) => {
           })}
         </Layer>
       </Stage>
-      <Button type="button"  color="primary">
-        Done
-      </Button>
+
+  
+      </Paper>
       </Box>
       </>
     );

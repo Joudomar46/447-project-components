@@ -38,14 +38,6 @@ export function DataFromAPI(infos) {
   // ];
 
 
-    // console.log(acMonthly[i])
-    let rows = [];
-
-  
-
-  
-
-
   function handleSubmit(
     resultsInfo
   ) {
@@ -59,10 +51,14 @@ export function DataFromAPI(infos) {
       .then(response => {
         console.log(response);
         setAcMonthly(response.data.outputs.ac_monthly);
-        setSolardMonthly(response.data.outputs.solard_monthly);
-        rows = solardMonthly.map(value => ({value }));
-        rows = acMonthly.map(value2 => ({value2 }));  
-        console.log(rows);
+        setSolardMonthly(response.data.outputs.solrad_monthly);
+        console.log("inside");
+
+        console.log(solardMonthly);
+
+        // for each month create rows array to house corosponding monthly 
+        // solarRadiation and Ac energy produced
+        //for each row
       
       })
       .catch(err => {
@@ -73,7 +69,25 @@ export function DataFromAPI(infos) {
       setShowComponent(true);
   }
 
-  console.log(acMonthly);
+  const rows = [];
+  if(acMonthly.length > 1){
+    console.log("outside");
+
+    console.log(solardMonthly);
+    const  months = ['January', 'February', 'March', 'April','May','June','July'
+    ,'Augest','September','October','November','December'];
+     
+      for (let i = 0; i < 12; i++) {
+        rows.push({
+          month: months[i],
+          solarRad: solardMonthly[i],
+          AcEnergy: acMonthly[i],
+        });
+       
+      }
+          
+          console.log(rows);
+  }
 
 //azimuth=180
 //system_capacity=4 (kw)
@@ -128,14 +142,7 @@ return(
 
 {showComponent ?  <Paper style={{ padding: 50, margin: 16 , 
         backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
-        <Table rows={rows}/></Paper>
-        : null}
-{/* <button onClick={handleClick}>Click me to call the API</button>
-<ul>
-      {acMonthly.map(item => (
-        <li>{item}</li>
-      ))}
-    </ul> */}
+        <Table rows={rows}/></Paper>: null}
     </div>
    
 </>

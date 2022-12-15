@@ -25,9 +25,11 @@ export function Create() {
   const [numPanelsTall, setNumPanelsTall] = useState(0);
 
   const [totalPanels, setTotalPanels] = useState(0);
+  const [keepoutPanels, setKeepoutPanels] = useState("");
 
-  const [addresses, setAddresses] = useState("");
 
+ const [showComponentPanel, setShowComponentPanel] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   // to remove form and show new form
   const [open, setOpen] = useState(false);
   const message = "Hello from OldComponent!";
@@ -42,6 +44,17 @@ export function Create() {
 
   // Initialize a new array
   const [array, setArray] = useState(new Array());
+
+  // from keep out how many panels are 'deleted'
+  function handleClick(deletedPanels){
+    const updatePanels = totalPanels - deletedPanels;
+    setKeepoutPanels(updatePanels);
+    // Update the state variable to set the component's visibility to `false`
+    setIsVisible(false);
+    // Update the state variable to show the new component
+    setShowComponentPanel(false);
+  }
+
 
   function handleSubmit(
     panelDimention,
@@ -88,6 +101,9 @@ export function Create() {
 
     const totalPanel = numPanelsWide * numPanelsTall;
     setTotalPanels(totalPanel);
+    // Once form is complete display the PanelDrawing
+    setShowComponentPanel(true);
+
   }
   // add coordinanted for each array
   // first coordinant starts at x and y = edgeSpacing from the upper left
@@ -161,47 +177,23 @@ export function Create() {
         justifyContent="space-around"
         alignItems="flex-start"
       >
-        <Grid item xs={2}>
+        <Grid item xs={2.5}>
           <Box>
-            <Form onSubmit={handleSubmit} />
-            <Button
-              disabled={panelDimentions === ""}
-              type="button"
-              onClick={handleOpen}
-              color="primary"
-            >
-              Open Modal
-            </Button>
-            <Modal open={open} onClose={handleClose}>
-              <div>
-              <DataFromAPI info={info} />
-                <Button type="button" onClick={handleClose} color="primary">
-                  Close Modal
-                </Button>
-              </div>
-            </Modal>
+          {isVisible ? <Form onSubmit={handleSubmit} /> : null}
           </Box>
         </Grid>
 
-        <Grid item xs>
-          <Box>
-            <p> Click and drag to draw keepout sections</p>
-            <Paper
-              style={{
-                padding: 50,
-                margin: 16,
-                backgroundColor: "#F8F0E3",
-                color: "#F8F0E3",
-              }}
-            >
-              <PanelDrawing
+        <Grid item xs ={8}>
+        {showComponentPanel ?  <div>
+                <PanelDrawing
                 panels={panels}
-                canvasDimenstions={canvasDimenstions}
-              />
-            </Paper>
-            <DataFromAPI info = {info}/>
-          </Box>
+                canvasDimenstions={canvasDimenstions} onClick={handleClick}
+              /></div>: null}
+         
+            
         </Grid>
+        {!isVisible ? <DataFromAPI info = {info}/>: null}
+        
       </Grid>
 
    

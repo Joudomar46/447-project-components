@@ -126,13 +126,13 @@ export function Form({ onSubmit }) {
      <Box display="flex"
   justifyContent="center"
   alignItems="center">
-    <p>Enter the information bellow</p></Box>
+    <h3>Enter the dimentions bellow</h3></Box>
       <Paper style={{ padding: 50, margin: 16 , 
         backgroundColor: '#F8F0E3', color: '#F8F0E3'}}>
         <Grid container
         direction="column"
         justifyContent="space-around"
-        alignItems="center" spacing={1}>
+        alignItems="center" spacing={0}>
           <Grid item xs={6}>
             <TextField
               name="panelWidth"
@@ -243,7 +243,7 @@ export function Form({ onSubmit }) {
 
           <Grid item xs={12}>
             <form/>
-            <Button   onClick={handleSubmit} type="submit" variant="contained" color="primary">
+            <Button  onClick={handleSubmit} type="submit" variant="contained" color="primary">
               Submit
             </Button>
             <form/>
