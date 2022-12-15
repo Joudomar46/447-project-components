@@ -115,7 +115,7 @@ export function Form({ onSubmit }) {
     setInputError4(false);
     setInputError5(false);
     setInputError6(false);
-
+  
     // return the updated values to Create
     onSubmit(panelDimention,roofDimention,spacingDimention);
   }

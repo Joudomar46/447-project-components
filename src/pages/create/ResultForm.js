@@ -9,13 +9,12 @@ import MenuItem from '@mui/material/MenuItem';
 
 import React, { useState } from "react";
 
-export const ResultsForm = ({onClick}) => {
+export const ResultsForm = ({onClick, keepoutPanels}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [resultsInfo, setresultsInfo] = useState({
     address: "",
     azmith: "",
-    system_capacity: "",
     losses: "14",
     array_type: "",
     module_type:"0",
@@ -25,11 +24,18 @@ export const ResultsForm = ({onClick}) => {
     radius: "0",
     dataset:"nsrdb",
     tilt:"",
+    panelWattage:350, 
+    system_capacity: 4,
   });
 
   function handleSubmit(event) {
     event.preventDefault();
-     // return the updated values to Create
+    // return the updated values to Create
+    // Arrray Size (kW) = Module Nameplate Size (W) × Number of Modules ÷ 1,000 W/kW
+
+     resultsInfo.system_capacity = (+keepoutPanels.keepoutPanels * +resultsInfo.panelWattage) /1000;
+     
+     console.log(resultsInfo.system_capacity);
      onClick(resultsInfo);
     }
   
@@ -122,6 +128,19 @@ export const ResultsForm = ({onClick}) => {
               name="tilt"
               label="Panel Tilt"
               value={resultsInfo.tilt}
+              onChange={(event) =>
+                setresultsInfo({
+                  ...resultsInfo,
+                  [event.target.name]: event.target.value,
+                })
+              }
+         /></Grid>
+
+          <Grid item xs= "auto">
+            <TextField
+              name="panelWattage"
+              label="Panel Wattage W (optional)"
+              value={resultsInfo.panelWattage}
               onChange={(event) =>
                 setresultsInfo({
                   ...resultsInfo,

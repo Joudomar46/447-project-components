@@ -25,7 +25,7 @@ export function Create() {
   const [numPanelsTall, setNumPanelsTall] = useState(0);
 
   const [totalPanels, setTotalPanels] = useState(0);
-  const [keepoutPanels, setKeepoutPanels] = useState("");
+  const [keepoutPanels, setKeepoutPanels] = useState(0);
 
 
  const [showComponentPanel, setShowComponentPanel] = useState(false);
@@ -38,7 +38,7 @@ export function Create() {
   // from keep out how many panels are 'deleted'
   function handleClick(deletedPanels){
     const updatePanels = totalPanels - deletedPanels;
-    setKeepoutPanels(updatePanels);
+    setKeepoutPanels(+updatePanels);
     // Update the state variable to set the component's visibility to `false`
     setIsVisible(false);
     // Update the state variable to show the new component
@@ -51,20 +51,22 @@ export function Create() {
     roofDimention,
     spacingDimention
   ) {
+    const ratio = 1000/Math.max(roofDimention.roofWidth, roofDimention.roofHeight);
+    panelDimention.panelWidth *= ratio;
+    panelDimention.panelHeight *= ratio;
+    roofDimention.roofWidth *= ratio;
+    roofDimention.roofHeight *= ratio;
+    spacingDimention.rowSpacing *= ratio;
+    spacingDimention.columnSpacing *= ratio;
+    spacingDimention.edgeSpacing *= ratio;
+
+  
     setPanelDimentions(panelDimention);
     setRoofDimentions(roofDimention);
     setSpacingDimentions(spacingDimention);
 
     // copy over the newly changed inputs using + to convert from string to number
-    // const ratio = 1000/Math.max(roofDimention.roofWidth, roofDimention.roofHeight);
-    // setPanelDimentions( +panelDimentions.panelWidth * ratio);
-    // panelDimentions.panelHeight *= ratio;
-    // roofDimentions.roofWidth *= ratio;
-    // roofDimentions.roofHeight *= ratio;
-    // spacingDimentions.rowSpacing *= ratio;
-    // spacingDimentions.columnSpacing *= ratio;
-    // spacingDimentions.edgeSpacing *= ratio;
-
+ 
     const juristictionWidth = Math.floor(
       +panelDimention.panelWidth + +spacingDimention?.columnSpacing
     );
@@ -154,10 +156,7 @@ export function Create() {
     canvasHight: +roofDimentions.roofHeight,
   };
 
-  const info = {
-    totalPanels: +keepoutPanels,
-    panelArea: +panelDimentions.panelHeight * +panelDimentions.panelWidth,
-  };
+ 
 
   return (
     <>
@@ -182,7 +181,7 @@ export function Create() {
          
             
         </Grid>
-        {!isVisible ? <DataFromAPI info = {info}/>: null}
+        {!isVisible ? <DataFromAPI keepoutPanels = {keepoutPanels}/>: null}
         
       </Grid>
 

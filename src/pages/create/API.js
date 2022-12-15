@@ -6,18 +6,22 @@ import Paper from "@mui/material/Paper";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
 
 
 
 // function getDataFromAPI(requestParams)
-export function DataFromAPI(infos) {
+export function DataFromAPI(keepoutPanels) {
   const [error, setError] = useState(null);
   const [clicked, setClicked] = useState(false);
   
   const [acMonthly, setAcMonthly] = useState([]);
   const [solardMonthly, setSolardMonthly] = useState([]);
+  const [AcAnnual,setAcAnnual] = useState(0);
+  const [solardAnnual, setSolardAnnual] = useState(0);
 
   const [resultsInfos, setresultsInfos] = useState("");
+  const [panelInfo,setPanelInfo]  = useState(0);
   const [flag,setFlag]=useState(false);
 
   const [showComponent, setShowComponent] = useState(false);
@@ -25,46 +29,26 @@ export function DataFromAPI(infos) {
   // to remove form and show new form
   const [open, setOpen] = useState(false);
 
-
-  // function createData(month, value,value2) {
-  //   return { month, value ,value2};
-  // }
-  // let rows = [
-  //   createData('January', '',''),
-  //   createData('February', '',''),
-  //   createData('March', '',''),
-  //   createData('April',  '',''),
-  //   createData('May',  '',''),
-  //   createData('June', '',''),
-  //   createData('July',  '',''),
-  //   createData('August',  '',''),
-  //   createData('September', '',''),
-  //   createData('October',  '',''),
-  //   createData('November',  '',''),
-  //   createData('December',  '',''),
-  // ];
-
-
   function handleSubmit(
     resultsInfo
   ) {
-
     setresultsInfos(resultsInfo);
+    setPanelInfo(keepoutPanels);
+    
     setFlag(true);
     handleOpen();
   }
+  // console.log(resultsInfos.system_capacity);
 
   if(flag && resultsInfos.address != ''){
-    console.log("True");
-    axios.get(`https://developer.nrel.gov/api/pvwatts/v8.json?&api_key=DEMO_KEY&azimuth=${resultsInfos.azmith}&system_capacity=4&losses=${resultsInfos.losses}&array_type=${resultsInfos.array_type}&module_type=${resultsInfos.module_type}&gcr=${resultsInfos.gcr}&dc_ac_ratio=${resultsInfos.dc_ac_ratio}&inv_eff=${resultsInfos.inv_eff}&radius=${resultsInfos.radius}&dataset=${resultsInfos.dataset}&tilt=${resultsInfos.tilt}&address=${resultsInfos.address}&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
+
+    axios.get(`https://developer.nrel.gov/api/pvwatts/v8.json?&api_key=DEMO_KEY&azimuth=${resultsInfos.azmith}&system_capacity=${resultsInfos.system_capacity}&losses=${resultsInfos.losses}&array_type=${resultsInfos.array_type}&module_type=${resultsInfos.module_type}&gcr=${resultsInfos.gcr}&dc_ac_ratio=${resultsInfos.dc_ac_ratio}&inv_eff=${resultsInfos.inv_eff}&radius=${resultsInfos.radius}&dataset=${resultsInfos.dataset}&tilt=${resultsInfos.tilt}&address=${resultsInfos.address}&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
       .then(response => {
-        console.log(response);
         setAcMonthly(response.data.outputs.ac_monthly);
         setSolardMonthly(response.data.outputs.solrad_monthly);
-        console.log("inside");
-
-        console.log(solardMonthly);
-
+        setAcAnnual(response.data.outputs.ac_annual);
+        setSolardAnnual(response.data.outputs.solrad_annual);
+        
         // for each month create rows array to house corosponding monthly 
         // solarRadiation and Ac energy produced
         //for each row
@@ -80,9 +64,6 @@ export function DataFromAPI(infos) {
 
   const rows = [];
   if(acMonthly.length > 1){
-    console.log("outside");
-
-    console.log(solardMonthly);
     const  months = ['January', 'February', 'March', 'April','May','June','July'
     ,'Augest','September','October','November','December'];
      
@@ -94,8 +75,6 @@ export function DataFromAPI(infos) {
         });
        
       }
-          
-          console.log(rows);
   }
 
 //azimuth=180
@@ -124,29 +103,42 @@ const handleClose = () => {
 return(
 <>
   
-<ResultsForm onClick={handleSubmit} />
+<ResultsForm onClick={handleSubmit} keepoutPanels = {keepoutPanels}/>
 
-{showComponent ?   <div>
+{showComponent ?   
+  
   <Box display="inline-block"
       justifyContent="center"
         alignItems="center">
         <Modal open={open} onClose={handleClose}>
- 
+        
        <Paper style={{ padding: 20, margin: 16 , 
         backgroundColor: '#F8F0E3', color: 'black', minHeight: '90vh',
-        maxHeight: '120vh'}}>
-        
-      <div>
-        
+        maxHeight: '100vh'}}>
+        <Grid
+        container
+        spacing={1}
+        justifyContent="space-around"
+        alignItems="flex-start"
+      >
+     
+         <Grid item xs={5}>
         <Button type="button" onClick={handleClose} color="primary">
        Close Results
       </Button> 
       <Table rows = {rows}/>
-      </div>
-        </Paper>
+      </Grid>
+
+      <Grid item xs={5}>
+      <h4>Your Anual Solar Radiation: {solardAnnual} (kWh/m2/day)</h4>
+      <h4>Your Anual AC: {AcAnnual} (kWh)</h4>
+      <h4>Your total production: {resultsInfos.system_capacity*1000}(kW)</h4>     
+       </Grid>
+       </Grid> </Paper>  
         </Modal>
         </Box>
-        </div>
+      
+   
         : null}
    
 </>
