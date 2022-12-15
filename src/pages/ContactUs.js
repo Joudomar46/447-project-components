@@ -91,7 +91,7 @@ export default function Contact() {
     <p>Marc</p>
     <p>Tanner</p>
     <p>Zoe</p>
-    <Button type="button" onClick={generateFortune} type="submit" variant="contained" color="primary">
+    <Button type="button" onClick={generateFortune} variant="contained" color="primary">
        Fortune Cookie
       </Button> 
       {Fortune && <p>{Fortune}</p>}
