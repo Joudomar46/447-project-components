@@ -11,6 +11,7 @@ export function DataFromAPI(infos) {
   const [clicked, setClicked] = useState(false);
   
   const [acMonthly, setAcMonthly] = useState([]);
+  const [solardMonthly, setSolardMonthly] = useState([]);
 
   const [resultsInfos, setresultsInfos] = useState("");
   const [flag,setFlag]=useState(false);
@@ -18,26 +19,32 @@ export function DataFromAPI(infos) {
   const [showComponent, setShowComponent] = useState(false);
 
 
-  function createData(month, value,value2) {
-    return { month, value ,value2};
-  }
+  // function createData(month, value,value2) {
+  //   return { month, value ,value2};
+  // }
+  // let rows = [
+  //   createData('January', '',''),
+  //   createData('February', '',''),
+  //   createData('March', '',''),
+  //   createData('April',  '',''),
+  //   createData('May',  '',''),
+  //   createData('June', '',''),
+  //   createData('July',  '',''),
+  //   createData('August',  '',''),
+  //   createData('September', '',''),
+  //   createData('October',  '',''),
+  //   createData('November',  '',''),
+  //   createData('December',  '',''),
+  // ];
+
+
+    // console.log(acMonthly[i])
+    let rows = [];
+
   
-  const rows = [
-    createData('January', 100,100),
-    createData('February', 200,100),
-    createData('March', 300,100),
-    createData('April', 400,100),
-    createData('May', 500,100),
-    createData('June', 600,100),
-    createData('July', 700,34),
-    createData('August', 800,234),
-    createData('September', 900,242),
-    createData('October', 1000,324),
-    createData('November', 1100,243),
-    createData('December', 1200,2432),
-  ];
+
   
-  console.log(rows);
+
 
   function handleSubmit(
     resultsInfo
@@ -52,6 +59,11 @@ export function DataFromAPI(infos) {
       .then(response => {
         console.log(response);
         setAcMonthly(response.data.outputs.ac_monthly);
+        setSolardMonthly(response.data.outputs.solard_monthly);
+        rows = solardMonthly.map(value => ({value }));
+        rows = acMonthly.map(value2 => ({value2 }));  
+        console.log(rows);
+      
       })
       .catch(err => {
         setError(err);

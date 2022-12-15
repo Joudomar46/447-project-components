@@ -21,11 +21,11 @@ const MonthlyDataTable = ({ rows }) => {
       <Table aria-label="simple table" >
         <TableHead>
           <TableRow sx={{
-        backgroundColor: "yellow",
+        backgroundColor: "#1565c0",
         borderBottom: "2px solid black",
         "& th": {
           fontSize: "1.25rem",
-          color: "rgba(96, 96, 96)"
+          color: "black"
         }
       }}>
             <TableCell sx={{
