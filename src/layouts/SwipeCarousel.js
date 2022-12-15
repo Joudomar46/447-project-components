@@ -1,27 +1,25 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MobileStepper from "@mui/material/MobileStepper";
+import Button from "@mui/material/Button";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
-    imgPath: require('../media/solar1.jpg'),
+    imgPath: require("../media/solar1.jpg"),
   },
   {
-    imgPath: require('../media/solar2.jpg'),
+    imgPath: require("../media/solar2.jpg"),
   },
   {
-    imgPath:require('../media/solar3.jpg'),
+    imgPath: require("../media/solar3.jpg"),
   },
   {
-    imgPath:require('../media/solar4.jpg'),
+    imgPath: require("../media/solar4.jpg"),
   },
 ];
 
@@ -44,9 +42,8 @@ export function SwipeCarousel() {
 
   return (
     <Box sx={{ maxWidth: 800, flexGrow: 1 }}>
-  
       <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
@@ -58,10 +55,10 @@ export function SwipeCarousel() {
                 component="img"
                 sx={{
                   height: 655,
-                  display: 'block',
+                  display: "block",
                   maxWidth: 800,
-                  overflow: 'hidden',
-                  width: '100%',
+                  overflow: "hidden",
+                  width: "100%",
                 }}
                 src={step.imgPath}
                 alt={step.label}
@@ -85,7 +82,6 @@ export function SwipeCarousel() {
         }
         backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-
             Back
           </Button>
         }

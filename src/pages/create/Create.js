@@ -1,13 +1,8 @@
 import { Form } from "./Form";
 import { PanelDrawing } from "./PanelDrawing";
-import { Stage, Layer, Rect } from "react-konva";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { DataFromAPI } from "./API";
-import Modal from "@mui/material/Modal";
-import {ResultsForm} from "./ResultForm";
-import Button from "@mui/material/Button";
 
 
 import React, { useLayoutEffect, useState } from "react";
@@ -27,16 +22,14 @@ export function Create() {
   const [totalPanels, setTotalPanels] = useState(0);
   const [keepoutPanels, setKeepoutPanels] = useState(0);
 
-
- const [showComponentPanel, setShowComponentPanel] = useState(false);
+  const [showComponentPanel, setShowComponentPanel] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-
 
   // Initialize a new array
   const [array, setArray] = useState(new Array());
 
   // from keep out how many panels are 'deleted'
-  function handleClick(deletedPanels){
+  function handleClick(deletedPanels) {
     const updatePanels = totalPanels - deletedPanels;
     setKeepoutPanels(+updatePanels);
     // Update the state variable to set the component's visibility to `false`
@@ -45,13 +38,9 @@ export function Create() {
     setShowComponentPanel(false);
   }
 
-
-  function handleSubmit(
-    panelDimention,
-    roofDimention,
-    spacingDimention
-  ) {
-    const ratio = 1000/Math.max(roofDimention.roofWidth, roofDimention.roofHeight);
+  function handleSubmit(panelDimention, roofDimention, spacingDimention) {
+    const ratio =
+      1000 / Math.max(roofDimention.roofWidth, roofDimention.roofHeight);
     panelDimention.panelWidth *= ratio;
     panelDimention.panelHeight *= ratio;
     roofDimention.roofWidth *= ratio;
@@ -60,13 +49,12 @@ export function Create() {
     spacingDimention.columnSpacing *= ratio;
     spacingDimention.edgeSpacing *= ratio;
 
-  
     setPanelDimentions(panelDimention);
     setRoofDimentions(roofDimention);
     setSpacingDimentions(spacingDimention);
 
     // copy over the newly changed inputs using + to convert from string to number
- 
+
     const juristictionWidth = Math.floor(
       +panelDimention.panelWidth + +spacingDimention?.columnSpacing
     );
@@ -95,7 +83,6 @@ export function Create() {
     setTotalPanels(totalPanel);
     // Once form is complete display the PanelDrawing
     setShowComponentPanel(true);
-
   }
   // add coordinanted for each array
   // first coordinant starts at x and y = edgeSpacing from the upper left
@@ -156,8 +143,6 @@ export function Create() {
     canvasHight: +roofDimentions.roofHeight,
   };
 
- 
-
   return (
     <>
       <Grid
@@ -167,25 +152,22 @@ export function Create() {
         alignItems="flex-start"
       >
         <Grid item xs={2.5}>
-          <Box>
-          {isVisible ? <Form onSubmit={handleSubmit} /> : null}
-          </Box>
+          <Box>{isVisible ? <Form onSubmit={handleSubmit} /> : null}</Box>
         </Grid>
 
-        <Grid item xs ={8}>
-        {showComponentPanel ?  <div>
-                <PanelDrawing
+        <Grid item xs={8}>
+          {showComponentPanel ? (
+            <div>
+              <PanelDrawing
                 panels={panels}
-                canvasDimenstions={canvasDimenstions} onClick={handleClick}
-              /></div>: null}
-         
-            
+                canvasDimenstions={canvasDimenstions}
+                onClick={handleClick}
+              />
+            </div>
+          ) : null}
         </Grid>
-        {!isVisible ? <DataFromAPI keepoutPanels = {keepoutPanels}/>: null}
-        
+        {!isVisible ? <DataFromAPI keepoutPanels={keepoutPanels} /> : null}
       </Grid>
-
-   
     </>
   );
 }

@@ -3,11 +3,9 @@
 import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import Box from '@mui/material/Box';
-
+import Box from "@mui/material/Box";
 
 export default function Contact() {
-
   var Fortunes = [
     "A friend is a treasure",
     "An enemy is a lesson",
@@ -41,18 +39,17 @@ export default function Contact() {
     "This statement is a lie.",
     "This fortune left blank intentionally.",
     "This fortune is inoperative.  Please try another.",
-    "There's always one more bug."
+    "There's always one more bug.",
   ];
-      
+
   const [Fortune, setFortune] = useState(null);
   var fortuneText;
   function generateFortune() {
     const index = Math.floor(Math.random() * Fortunes.length);
     setFortune(Fortunes[index]);
-    
   }
-  
-  function nextState(){
+
+  function nextState() {
     let elClass = this.classList,
       spawned = "spawned",
       opened = "opened";
@@ -62,42 +59,61 @@ export default function Contact() {
       elClass.remove(spawned);
       elClass.add(opened);
 
-    // new cookie
+      // new cookie
     } else {
       elClass.remove(opened);
       elClass.add(spawned);
       generateFortune();
     }
-  };
+  }
 
   return (
     <>
-    <Box display="flex"
-    justifyContent="center"
-     alignItems="center" >
-       
- 
-    <Paper style={{ padding: 50, margin: 16 , 
-      backgroundColor: '#F8F0E3', color: 'black', alignText:"center"}}>
-         <Box display="flex"
-    justifyContent="center"  flexDirection = 'column'
-     alignItems="center" >
-        <p>Welcome to the Contact Us page.  Below are our ways of contact.</p>
-          <p><b>Phone:  410-399-2887</b></p>
-            <p><b>Email:  ezwatts@gmail.com</b></p>
-               <p><b>Other Contacts</b></p>
-    <p>Ace</p>
-    <p>Joud</p>
-    <p>Marc</p>
-    <p>Tanner</p>
-    <p>Zoe</p>
-    <Button type="button" onClick={generateFortune} variant="contained" color="primary">
-       Fortune Cookie
-      </Button> 
-      {Fortune && <p>{Fortune}</p>}
-    </Box>
-      </Paper>
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Paper
+          style={{
+            padding: 50,
+            margin: 16,
+            backgroundColor: "#F8F0E3",
+            color: "black",
+            alignText: "center",
+          }}
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <p>
+              Welcome to the Contact Us page. Below are our ways of contact.
+            </p>
+            <p>
+              <b>Phone: 410-399-2887</b>
+            </p>
+            <p>
+              <b>Email: ezwatts@gmail.com</b>
+            </p>
+            <p>
+              <b>Other Contacts</b>
+            </p>
+            <p>Ace</p>
+            <p>Joud</p>
+            <p>Marc</p>
+            <p>Tanner</p>
+            <p>Zoe</p>
+            <Button
+              type="button"
+              onClick={generateFortune}
+              variant="contained"
+              color="primary"
+            >
+              Fortune Cookie
+            </Button>
+            {Fortune && <p>{Fortune}</p>}
+          </Box>
+        </Paper>
       </Box>
     </>
-  )
-} 
+  );
+}
