@@ -29,13 +29,12 @@ export function Home() {
   </Link> 
   </Box>
          <p className="main-description">
-                    Here at EzWatts, we believe that a person should be
-                    able to have ease of access when implementing
-                    solar panels for one's house.  Whether it is a company
-                    or an individual, with our program you can set an outline
-                    of your roof, point out your obstructions, and get an accurate
-                    representation and price for the placement and installation 
-                    of solar panels.
+         Here at EzWatts, we believe that a person should be
+                    able to see what solar panels can do for THEM at the
+                    low low price of absolutely FREE. Our website is user
+                    friendly, aesthetically pleasing, accurate, and fun
+                    for the whole family (If you know where to look ;) ).
+                    Oh, and did we mention it's free?
                 </p>
                 </Grid>
         </Grid>

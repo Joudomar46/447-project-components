@@ -21,7 +21,6 @@ export function DataFromAPI(keepoutPanels) {
   const [solardAnnual, setSolardAnnual] = useState(0);
 
   const [resultsInfos, setresultsInfos] = useState("");
-  const [panelInfo,setPanelInfo]  = useState(0);
   const [flag,setFlag]=useState(false);
 
   const [showComponent, setShowComponent] = useState(false);
@@ -33,7 +32,6 @@ export function DataFromAPI(keepoutPanels) {
     resultsInfo
   ) {
     setresultsInfos(resultsInfo);
-    setPanelInfo(keepoutPanels);
     
     setFlag(true);
     handleOpen();
@@ -41,8 +39,10 @@ export function DataFromAPI(keepoutPanels) {
   // console.log(resultsInfos.system_capacity);
 
   if(flag && resultsInfos.address != ''){
+    // My API Key for the nrel.gov website xM2kFyelHnDEEsM7l9MRd3TUruunJBq5NURxKVEL
+    axios.get(`https://developer.nrel.gov/api/pvwatts/v8.json?&api_key=xM2kFyelHnDEEsM7l9MRd3TUruunJBq5NURxKVEL&azimuth=${resultsInfos.azmith}&system_capacity=${resultsInfos.system_capacity}&losses=${resultsInfos.losses}&array_type=${resultsInfos.array_type}&module_type=${resultsInfos.module_type}&gcr=${resultsInfos.gcr}&dc_ac_ratio=${resultsInfos.dc_ac_ratio}&inv_eff=${resultsInfos.inv_eff}&radius=${resultsInfos.radius}&dataset=${resultsInfos.dataset}&tilt=${resultsInfos.tilt}&address=${resultsInfos.address}&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
 
-    axios.get(`https://developer.nrel.gov/api/pvwatts/v8.json?&api_key=DEMO_KEY&azimuth=${resultsInfos.azmith}&system_capacity=${resultsInfos.system_capacity}&losses=${resultsInfos.losses}&array_type=${resultsInfos.array_type}&module_type=${resultsInfos.module_type}&gcr=${resultsInfos.gcr}&dc_ac_ratio=${resultsInfos.dc_ac_ratio}&inv_eff=${resultsInfos.inv_eff}&radius=${resultsInfos.radius}&dataset=${resultsInfos.dataset}&tilt=${resultsInfos.tilt}&address=${resultsInfos.address}&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
+    // axios.get(`https://developer.nrel.gov/api/pvwatts/v8.json?&api_key=DEMO_KEY&azimuth=${resultsInfos.azmith}&system_capacity=${resultsInfos.system_capacity}&losses=${resultsInfos.losses}&array_type=${resultsInfos.array_type}&module_type=${resultsInfos.module_type}&gcr=${resultsInfos.gcr}&dc_ac_ratio=${resultsInfos.dc_ac_ratio}&inv_eff=${resultsInfos.inv_eff}&radius=${resultsInfos.radius}&dataset=${resultsInfos.dataset}&tilt=${resultsInfos.tilt}&address=${resultsInfos.address}&soiling=12|4|45|23|9|99|67|12.54|54|9|0|7.6&albedo=0.3&bifaciality=0.7`)
       .then(response => {
         setAcMonthly(response.data.outputs.ac_monthly);
         setSolardMonthly(response.data.outputs.solrad_monthly);
@@ -70,8 +70,8 @@ export function DataFromAPI(keepoutPanels) {
       for (let i = 0; i < 12; i++) {
         rows.push({
           month: months[i],
-          solarRad: solardMonthly[i],
-          AcEnergy: acMonthly[i],
+          solarRad: solardMonthly[i].toFixed(2),
+          AcEnergy: acMonthly[i].toFixed(2),
         });
        
       }
@@ -130,9 +130,9 @@ return(
       </Grid>
 
       <Grid item xs={5}>
-      <h4>Your Anual Solar Radiation: {solardAnnual} (kWh/m2/day)</h4>
-      <h4>Your Anual AC: {AcAnnual} (kWh)</h4>
-      <h4>Your total production: {resultsInfos.system_capacity*1000}(kW)</h4>     
+      <h4>Your Anual Solar Radiation: {solardAnnual.toFixed(2)} (kWh/m2/day)</h4>
+      <h4>Your Anual AC: {AcAnnual.toFixed(2)} (kWh)</h4>
+      <h4>Your total production value ${AcAnnual.toFixed(2)*resultsInfos.costPerKWH.toFixed(2)}</h4>     
        </Grid>
        </Grid> </Paper>  
         </Modal>

@@ -136,7 +136,7 @@ export function Form({ onSubmit }) {
           <Grid item xs={6}>
             <TextField
               name="panelWidth"
-              label="Panel Width"
+              label="Panel Width (m)"
               value={panelDimention.panelWidth}
               onChange={(event) =>
                 setPanelDimention({
@@ -151,7 +151,7 @@ export function Form({ onSubmit }) {
           <Grid item xs={6} sm={6}>
             <TextField
               name="panelHeight"
-              label="Panel Height"
+              label="Panel Height (m)"
               value={panelDimention.panelHeight}
               onChange={(event) =>
                 setPanelDimention({
@@ -167,7 +167,7 @@ export function Form({ onSubmit }) {
           <Grid item xs={6} sm={6}>
             <TextField
               name="roofWidth"
-              label="Roof Width"
+              label="Roof Width (m)"
               value={roofDimention.roofWidth}
               onChange={(event) =>
                 setRoofDimention({
@@ -182,7 +182,7 @@ export function Form({ onSubmit }) {
             <Grid item xs={6} sm={6}>
             <TextField
               name="roofHeight"
-              label="Roof Hight"
+              label="Roof Hight (m)"
               value={roofDimention.roofHeight}
               onChange={(event) =>
                 setRoofDimention({
@@ -198,7 +198,7 @@ export function Form({ onSubmit }) {
             <Grid item xs={6} sm={6}>
             <TextField
               name="columnSpacing"
-              label="Column Spacing"
+              label="Column Spacing (m)"
               value={spacingDimention.columnSpacing}
               onChange={(event) =>
                 setSpacingDimention({
@@ -213,7 +213,7 @@ export function Form({ onSubmit }) {
             <Grid item xs={6} sm={6}>
             <TextField
               name="rowSpacing"
-              label="Row Spacing"
+              label="Row Spacing (m)"
               value={spacingDimention.rowSpacing}
               onChange={(event) =>
                 setSpacingDimention({
@@ -228,7 +228,7 @@ export function Form({ onSubmit }) {
             <Grid item xs={6} sm={6}>
             <TextField
               name="edgeSpacing"
-              label="Edge Spacing"
+              label="Edge Spacing (m)"
               value={spacingDimention.edgeSpacing}
               onChange={(event) =>
                 setSpacingDimention({

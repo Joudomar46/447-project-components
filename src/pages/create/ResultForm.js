@@ -26,6 +26,7 @@ export const ResultsForm = ({onClick, keepoutPanels}) => {
     tilt:"",
     panelWattage:350, 
     system_capacity: 4,
+    costPerKWH: .14
   });
 
   function handleSubmit(event) {
@@ -113,7 +114,7 @@ export const ResultsForm = ({onClick, keepoutPanels}) => {
           <Grid item xs= "auto">
             <TextField
               name="azmith"
-              label="Azmith"
+              label="Azmith - Degrees"
               value={resultsInfo.azmith}
               onChange={(event) =>
                 setresultsInfo({
@@ -126,7 +127,7 @@ export const ResultsForm = ({onClick, keepoutPanels}) => {
          <Grid item xs= "auto">
             <TextField
               name="tilt"
-              label="Panel Tilt"
+              label="Panel Tilt - Degrees"
               value={resultsInfo.tilt}
               onChange={(event) =>
                 setresultsInfo({
@@ -148,11 +149,23 @@ export const ResultsForm = ({onClick, keepoutPanels}) => {
                 })
               }
          /></Grid>
+          <Grid item xs= "auto">
+            <TextField
+              name="costPerKWH"
+              label="$Cost kWh (optional)"
+              value={resultsInfo.costPerKWH}
+              onChange={(event) =>
+                setresultsInfo({
+                  ...resultsInfo,
+                  [event.target.name]: event.target.value,
+                })
+              }
+         /></Grid>
 
           <Grid item xs= "auto">
             <TextField
               name="losses"
-              label="Losses (optional)"
+              label="Percent Losses (optional)"
               value={resultsInfo.losses}
               onChange={(event) =>
                 setresultsInfo({
@@ -165,7 +178,7 @@ export const ResultsForm = ({onClick, keepoutPanels}) => {
           <Grid item xs= "auto">
             <TextField
               name="gcr"
-              label="GCR (optional)"
+              label="GCR 0-1 (optional)"
               value={resultsInfo.gcr}
               onChange={(event) =>
                 setresultsInfo({
